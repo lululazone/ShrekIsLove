@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 
@@ -8,7 +12,7 @@
   pointer-events: none;
 }
 
-.App-main{
+.App-main {
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSumqEM-moWYSzoUlNokKD63Uxj_afniVwGvg&s");
   background-repeat: no-repeat;
   background-size: cover;
@@ -41,8 +45,8 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
-

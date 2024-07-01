@@ -1,29 +1,29 @@
-# Utilisez une image de base officielle de Node.js
-FROM node:14-alpine
+# Étape 1: Construire l'application React avec Node.js
+FROM --platform=$BUILDPLATFORM node:14-alpine AS build
 
-# Définissez le répertoire de travail dans le conteneur
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copiez le fichier package.json et le fichier package-lock.json (s'ils existent)
+# Copier les fichiers de dépendances
 COPY package*.json ./
 
-# Installez les dépendances de l'application
+# Installer les dépendances de l'application
 RUN npm install
 
-# Copiez tout le reste du code de l'application dans le conteneur
+# Copier le reste du code de l'application
 COPY . .
 
-# Construisez l'application pour la production
+# Construire l'application pour la production
 RUN npm run build
 
-# Utilisez une image de serveur Nginx pour servir les fichiers statiques
-FROM nginx:alpine
+# Étape 2: Servir l'application avec NGINX
+FROM --platform=$TARGETPLATFORM nginx:alpine
 
-# Copiez les fichiers de build de React dans le répertoire de Nginx
-COPY --from=0 /app/build /usr/share/nginx/html
+# Copier les fichiers de build de React vers NGINX
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Exposez le port sur lequel l'application va tourner
+# Exposer le port 80 pour le serveur
 EXPOSE 80
 
-# Commande pour démarrer Nginx
+# Commande pour démarrer NGINX
 CMD ["nginx", "-g", "daemon off;"]
