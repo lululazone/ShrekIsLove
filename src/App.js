@@ -12,6 +12,7 @@ function App() {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-GeAbd-_uqpbAEZyEEET0Pp-sijLYHumLuw&s"
               alt="Shrek"
           />
+
           <p>Bienvenue sur notre site dédié à Shrek, le grand et puissant ogre.</p>
           <div className="prayer">
             <p>Ô Shrek, notre Seigneur des marais,</p>
